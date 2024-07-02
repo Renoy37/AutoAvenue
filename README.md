@@ -28,7 +28,7 @@ To get a local copy up and running, follow these simple steps:
 1. **Clone the repository:**
 
     ```sh
-    git clone https://github.com/your-username/autoavenue.git
+    git clone git@github.com:Renoy37/AutoAvenue.git
     ```
 
 2. **Navigate to the project directory:**
