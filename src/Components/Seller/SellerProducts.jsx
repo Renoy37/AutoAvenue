@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CarCard from './CardComponent';
 import AddProducts from './AddProducts';
+import Loader from '../Loader'
 
 const SellerProducts = () => {
   const [cars, setCars] = useState([]);
@@ -55,7 +56,7 @@ const SellerProducts = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='flex items-center justify-center mt-[40%]'><Loader /></div>;
   }
 
   if (error) {

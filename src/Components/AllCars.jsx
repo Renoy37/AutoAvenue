@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
+import Loader from './Loader'
 
 const AllCars = () => {
     const [make, setMake] = useState('');
@@ -66,7 +67,7 @@ const AllCars = () => {
     }
 
     if (loading) {
-        return <p>Loading...</p>;  // Display loading indicator while fetching data
+        return <p className='flex items-center justify-center mt-[40%]'><Loader /></p>;  // Display loading indicator while fetching data
     }
 
     return (

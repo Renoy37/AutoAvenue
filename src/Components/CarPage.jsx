@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Loader from '../Components/Loader'
 
 const CarCard = ({ car, onOrder, onCancelOrder, token }) => {
   const [orderPlaced, setOrderPlaced] = useState(false);
@@ -140,7 +141,7 @@ const CarPage = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>; 
+    return <p className='flex items-center justify-center mt-[40%]'><Loader /></p>; 
   }
 
   return (
