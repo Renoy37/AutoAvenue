@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 export const ContactUs = () => {
   const [inputs, setInputs] = useState({});
+  const [messageSent, setMessageSent] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -9,13 +11,29 @@ export const ContactUs = () => {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log("Done");
+    
+    try {
+      const response = await fetch('https://autoavenuebackend.onrender.com/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(inputs),
+      });
 
-    // Clear form inputs after submission
-    setInputs({});
+      if (response.ok) {
+        setMessageSent(true);
+        setError('');
+        setInputs({});
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'An error occurred. Please try again.');
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -38,6 +56,14 @@ export const ContactUs = () => {
           contact form below or reach out to us directly using the provided
           contact information.
         </p>
+
+        {messageSent && (
+          <p className="text-green-600">Your message has been sent successfully!</p>
+        )}
+
+        {error && (
+          <p className="text-red-600">{error}</p>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <label className="block">

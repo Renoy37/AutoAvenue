@@ -1,26 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
-import carData from './Data'; // Import your car data array
 
 const AllCars = () => {
     const [make, setMake] = useState('');
     const [category, setCategory] = useState('');
     const [year, setYear] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [cars, setCars] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // Number of items to display per page
     const itemsPerPage = 5;
 
+    // Fetch data from API
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://autoavenuebackend.onrender.com/api/cars');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const data = await response.json();
+                setCars(data);  // Set fetched data into state
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     // Calculate total number of pages
-    const totalPages = Math.ceil(carData.length / itemsPerPage);
+    const totalPages = Math.ceil(cars.length / itemsPerPage);
 
     // Function to filter cars based on current page and filters
-    const filteredCars = carData
-        .filter(car => {
-            return (!make || car.carMake === make) &&
-                   (!category || car.carCategory === category) &&
-                   (!year || car.carYear === parseInt(year));
-        });
+    const filteredCars = cars.filter(car => {
+        return (!make || car.carMake === make) &&
+               (!category || car.carCategory === category) &&
+               (!year || car.carYear === parseInt(year));
+    });
 
     // Calculate cars to display for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -45,6 +65,10 @@ const AllCars = () => {
         );
     }
 
+    if (loading) {
+        return <p>Loading...</p>;  // Display loading indicator while fetching data
+    }
+
     return (
         <div className="flex">
             <div className="fixed left-0 w-1/4 h-screen overflow-y-auto bg-gray-100 p-4">
@@ -56,8 +80,8 @@ const AllCars = () => {
                     onChange={(e) => setMake(e.target.value)}
                 >
                     <option value="">All Makes</option>
-                    {/* Render makes dynamically from carData */}
-                    {[...new Set(carData.map(car => car.carMake))].map((make, index) => (
+                    {/* Render makes dynamically from fetched data */}
+                    {[...new Set(cars.map(car => car.carMake))].map((make, index) => (
                         <option key={index} value={make}>{make}</option>
                     ))}
                 </select>
@@ -69,8 +93,8 @@ const AllCars = () => {
                     onChange={(e) => setYear(e.target.value)}
                 >
                     <option value="">All Years</option>
-                    {/* Render years dynamically from carData */}
-                    {[...new Set(carData.map(car => car.carYear))].map((year, index) => (
+                    {/* Render years dynamically from fetched data */}
+                    {[...new Set(cars.map(car => car.carYear))].map((year, index) => (
                         <option key={index} value={year}>{year}</option>
                     ))}
                 </select>
@@ -82,8 +106,8 @@ const AllCars = () => {
                     onChange={(e) => setCategory(e.target.value)}
                 >
                     <option value="">All Categories</option>
-                    {/* Render categories dynamically from carData */}
-                    {[...new Set(carData.map(car => car.carCategory))].map((category, index) => (
+                    {/* Render categories dynamically from fetched data */}
+                    {[...new Set(cars.map(car => car.carCategory))].map((category, index) => (
                         <option key={index} value={category}>{category}</option>
                     ))}
                 </select>
@@ -96,8 +120,8 @@ const AllCars = () => {
                         <div className="flex items-center">
                             <img src={car.carImage} alt={`${car.carMake} ${car.carName}`}  width={100} height={75} />
                             <div className="ml-4">
-                            <h2 className="text-xl font-bold">{`${car.carMake} ${car.carName}`}</h2>
-                            <p>{car.carPrice}</p>
+                                <h2 className="text-xl font-bold">{`${car.carMake} ${car.carName}`}</h2>
+                                <p>{car.carPrice}</p>
                                 <p>Year: {car.carYear} &nbsp; Mileage: {car.carMileage}</p>
                                 <p>Body/Category: {car.carCategory}</p>
                                 <p>+254712345678</p>

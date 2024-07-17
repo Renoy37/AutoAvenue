@@ -3,6 +3,7 @@ import AutoAvenue from '../assets/AutoAvenue.png';
 import { Link, animateScroll as scroll } from 'react-scroll'; 
 import { FaHome, FaUserPlus, FaSignInAlt, FaBars, FaTimes } from 'react-icons/fa';
 
+
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -76,11 +77,19 @@ function Navbar() {
           >
             Contact
           </Link>
-          <a href="#" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
+          {/* <Link to="/signUp" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
+            <FaUserPlus className="mr-2" />
+            Register
+          </Link>
+          <Link to="/signUp" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
+            <FaSignInAlt className="mr-2" />
+            Log In
+          </Link> */}
+          <a href="/signUp" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
             <FaUserPlus className="mr-2" />
             Register
           </a>
-          <a href="#" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
+          <a href="/signUp" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
             <FaSignInAlt className="mr-2" />
             Log In
           </a>
