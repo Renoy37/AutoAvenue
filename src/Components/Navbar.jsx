@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import AutoAvenue from '../assets/AutoAvenue.png';
-import { Link, animateScroll as scroll } from 'react-scroll'; 
+import { Link as ScrollLink } from 'react-scroll'; // Import Link from react-scroll as ScrollLink
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { FaHome, FaUserPlus, FaSignInAlt, FaBars, FaTimes } from 'react-icons/fa';
-
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ function Navbar() {
           </div>
         </div>
         <nav className={`flex-col md:flex-row md:flex md:items-center ${isOpen ? 'flex' : 'hidden'} w-full md:w-auto`}>
-          <Link
+          <ScrollLink
             to="home"
             spy={true}
             smooth={true}
@@ -36,8 +36,8 @@ function Navbar() {
           >
             <FaHome className="mr-2" />
             Home
-          </Link>
-          <Link
+          </ScrollLink>
+          <ScrollLink
             to="body"
             spy={true}
             smooth={true}
@@ -46,8 +46,8 @@ function Navbar() {
             className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer"
           >
             Body
-          </Link>
-          <Link
+          </ScrollLink>
+          <ScrollLink
             to="featured"
             spy={true}
             smooth={true}
@@ -56,8 +56,8 @@ function Navbar() {
             className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer"
           >
             Featured
-          </Link>
-          <Link
+          </ScrollLink>
+          <ScrollLink
             to="about"
             spy={true}
             smooth={true}
@@ -66,8 +66,8 @@ function Navbar() {
             className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer"
           >
             About
-          </Link>
-          <Link
+          </ScrollLink>
+          <ScrollLink
             to="contact"
             spy={true}
             smooth={true}
@@ -76,23 +76,15 @@ function Navbar() {
             className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer"
           >
             Contact
-          </Link>
-          {/* <Link to="/signUp" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
+          </ScrollLink>
+          <Link to="/signUp" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
             <FaUserPlus className="mr-2" />
             Register
           </Link>
           <Link to="/signUp" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
             <FaSignInAlt className="mr-2" />
             Log In
-          </Link> */}
-          <a href="/signUp" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
-            <FaUserPlus className="mr-2" />
-            Register
-          </a>
-          <a href="/signUp" className="text-gray-700 hover:text-gray-900 flex items-center mb-2 md:mb-0 ml-3 cursor-pointer">
-            <FaSignInAlt className="mr-2" />
-            Log In
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
