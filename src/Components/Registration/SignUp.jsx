@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const AuthForm = () => {
+const signUp = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [role, setRole] = useState('');
@@ -170,4 +170,5 @@ const AuthForm = () => {
   );
 };
 
-export default AuthForm;
+export default signUp;
+// export default AuthForm;
