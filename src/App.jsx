@@ -4,7 +4,7 @@ import HomePage from './HomePage';
 import CarPage from "./Components/CarPage";
 import CarDetails from "./Components/CarDetails";
 import AllCars from './Components/AllCars';
-import SignUp from './Components/Registration/SignUp';
+import SignUp from './Components/Registration/SignUp.jsx';
 import SellerHome from './SellerHome';
 import BodyTypePage from './Components/BodyTypeId';
 import SearchResultsPage from './Components/SearchResultsPage';
